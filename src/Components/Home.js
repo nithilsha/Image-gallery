@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Card } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form';
 
@@ -8,10 +8,37 @@ import Form from 'react-bootstrap/Form';
 
 function Home() {
   const [images, setImages] = useState([]);
-  const [inputValues, setInputValue] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  
+  const [inputValue, setInputValue] = useState("");
+  const [searchTerm, setSearchTerm] = useState("nature");
+
+//using useEffect hook 
+
+useEffect(()=>{
+  // here call api
+  fetch(
+    "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=92b2fae1270fe3d6555ed0f40a6b222a&tags=cat&per_page=10&format=json&nojsoncallback=1"
+  )
+  .then()
+  .then()
+  .catch( (err)=>{
+    console.log(err);
+  })
+
+})
+
+const handleInputChange = (event)=>{
+setInputValue(event.target.value);
+}
  
+
+
+const handleKeyPress=(event)=>{
+if(event.key=== "Enter"){
+  //api call// 
+
+}
+}
+
   return (
     <div>
 {/* logics to call api and get images */}
@@ -30,7 +57,9 @@ function Home() {
 
 
 <Card.Body>
-<Form.Control type='text' placeholder='Search ...............'/>
+<Form.Control type='text' placeholder='Search ...............' value = {inputValue}
+onChange= {handleInputChange}
+onKeyPress = {handleKeyPress}/>
 <h6 className='text-center text-secondary'>
   Pics of Cat
 </h6>
